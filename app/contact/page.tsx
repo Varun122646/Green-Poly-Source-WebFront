@@ -92,7 +92,7 @@ export default function ContactPage() {
         <div className="container relative z-10">
           <FadeInWhenVisible>
             <div className="text-center mb-16">
-              <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-[white] rounded-full mb-4">
+              <span className="inline-block px-3 py-1 text-2xl font-medium bg-primary/10 text-[white] rounded-full mb-4">
                 Get In Touch
               </span>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
@@ -225,11 +225,15 @@ export default function ContactPage() {
           </FadeInWhenVisible>
 
           <FadeInWhenVisible>
-            <div className="rounded-lg overflow-hidden shadow-xl h-[400px] bg-gray-200">
-              {/* This would be replaced with an actual map component */}
-              <div className="w-full h-full flex items-center justify-center bg-primary/5">
-                <p className="text-muted-foreground">Interactive Map Would Be Displayed Here</p>
-              </div>
+            <div className="rounded-lg overflow-hidden shadow-xl h-[400px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153169!3d-37.8162792797517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d9f0b6d3b1b!2s123%20Recycling%20Way%2C%20Green%20City%2C%20EC0%20123%2C%20United%20Kingdom!5e0!3m2!1sen!2sus!4v1633021234567!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
             </div>
           </FadeInWhenVisible>
         </div>

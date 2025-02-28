@@ -76,7 +76,7 @@ export default function AboutPage() {
         <div className="container relative z-10">
           <FadeInWhenVisible>
             <div className="text-center mb-16">
-              <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary-foreground rounded-full mb-4">
+              <span className="inline-block px-3 py-1 text-2xl font-medium bg-primary/10 text-white rounded-full mb-4">
                 Our Story
               </span>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">About GREEN PolySource</h1>
@@ -91,7 +91,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="absolute -top-6 -left-6 w-24 h-24 bg-primary/20 rounded-full"></div>
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  src="/miss.jpg"
                   alt="Recycling facility"
                   width={600}
                   height={400}

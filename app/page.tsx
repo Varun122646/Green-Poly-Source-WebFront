@@ -186,12 +186,14 @@ export default function HomePage() {
                 transition={{ delay: 0.9 }}
                 className="flex flex-wrap gap-4"
               >
-                <Button size="lg" className="rounded-full px-8">
+                <Button size="lg" className="rounded-full px-8" onClick={() => document.getElementById('our-process')?.scrollIntoView({ behavior: 'smooth' })}>
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <Button size="lg" variant="outline" className="rounded-full px-8">
-                  Learn More
+                  <Link href="/about">
+                    Learn More
+                  </Link>
                 </Button>
               </motion.div>
 
@@ -325,44 +327,14 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      <section className="py-24 bg-muted relative">
-        <div className="container">
-          <FadeInWhenVisible>
-            <div className="text-center mb-16">
-              <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/20 text-primary rounded-full mb-4">
-                Why Choose Us
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Our Recycling Solutions</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                We provide comprehensive recycling services with a focus on sustainability and innovation.
-              </p>
-            </div>
-          </FadeInWhenVisible>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <FadeInWhenVisible key={index} delay={index * 0.1}>
-                <Card className="p-6 border-none shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card/50 backdrop-blur-sm">
-                  <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
-                    {feature.icon}
-                    <h3 className="text-xl font-bold mb-2 text-foreground">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
-                  </motion.div>
-                </Card>
-              </FadeInWhenVisible>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 bg-background relative overflow-hidden">
+      <section id="our-process" className="py-24 bg-background relative overflow-hidden">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <FadeInWhenVisible>
               <div className="relative">
                 <div className="absolute -top-6 -left-6 w-24 h-24 bg-primary/20 rounded-full"></div>
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  src="/process.jpg"
                   alt="Recycling process"
                   width={600}
                   height={600}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { Mail, MapPin, Phone, Send } from "lucide-react"
 import { useInView } from "react-intersection-observer"
@@ -48,6 +48,41 @@ function FadeInWhenVisible({ children, delay = 0, direction = null }: { children
 }
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    organization: '',
+    message: '',
+  });
+
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert('Contact saved successfully');
+      } else {
+        alert('Error saving information');
+      }
+    } catch (error) {
+      alert('Error saving information');
+    }
+  };
+
   return (
     <div className="pt-16">
       <section className="py-20 relative overflow-hidden">
@@ -74,34 +109,34 @@ export default function ContactPage() {
                   <Send className="mr-2 h-5 w-5 text-[#182404]" />
                   Send Us a Message
                 </h2>
-                <form className="space-y-6 text-[#182404]">
+                <form className="space-y-6 text-[#182404]" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2 ">
                       <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" placeholder="John" className="text-white" />
+                      <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="" className="text-white" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" placeholder="Doe" className="text-white" />
+                      <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="" className="text-white" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="john.doe@example.com" className="text-white" />
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="" className="text-white" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone (Optional)</Label>
-                    <Input id="phone" type="tel" placeholder="+1 (123) 456-7890" className="text-white"/>
+                    <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="" className="text-white"/>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="How can we help you?" className="text-white" />
+                    <Label htmlFor="organization">Organization Name</Label>
+                    <Input id="organization" name="organization" value={formData.organization} onChange={handleChange} placeholder="" className="text-white"/>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" placeholder="Tell us more about your inquiry..." rows={4} className="text-white" />
+                    <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us more about your inquiry..." rows={4} className="text-white placeholder-transparent focus:placeholder-white focus:placeholder-opacity-50 transition-all duration-300" />
                   </div>
-                  <Button className="w-full">
+                  <Button className="w-full" type="submit">
                     Send Message
                     <Send className="ml-2 h-4 w-4" />
                   </Button>
@@ -202,4 +237,3 @@ export default function ContactPage() {
     </div>
   )
 }
-
